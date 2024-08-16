@@ -23,6 +23,7 @@ header {
 	justify-content: center;
 	align-items: center;
 	margin-right: 20px;
+	cursor: pointer;
 }
 
 .nav__logo {
@@ -324,4 +325,71 @@ header {
 	margin: 5px;
 	color: #181818a9;
 	border-radius: 20px;
+}
+
+/* footer */
+.footer {
+	width: 100%;
+	height: 60px;
+}
+
+.footer .footer__lists {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.footer .footer__lists .footer__li {
+	padding: 10px;
+}
+
+.footer .footer__lists .footer__li:hover {
+	cursor: pointer;
+}
+
+/* detail */
+.detail {
+	width: 700px;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.detail .detail__image {
+	width: 700px;
+	height: 400px;
+	border-radius: 20px;
+	margin-top: 30px;
+}
+
+.detail .detail__title {
+	font-size: 40px;
+	font-weight: 700;
+	padding: 10px;
+	word-break: keep-all;
+}
+
+.detail .detail__tag {
+	display: inline-block;
+	/* width: 100%; */
+	border-radius: 15px;
+	padding: 10px 10px 8px 10px;
+	background-color: #e5e8eb;
+	margin-bottom: 30px;
+}
+
+.detail .detail__author {
+	display: block;
+}
+
+.detail .detail__date {
+	display: block;
+	color: #99a2ad;
+	font-size: 14px;
+	/* padding: 10px; */
+	margin: 10px 0 30px 0;
 }

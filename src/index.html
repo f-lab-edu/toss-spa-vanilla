@@ -18,8 +18,11 @@
 	<body>
 		<header>
 			<nav class="nav">
-				<div class="nav__logo-wrapper">
+				<div
+					class="nav__logo-wrapper"
+					onClick="goMain()">
 					<img
+						draggable="false"
 						class="nav__logo"
 						src="../public/assets/images/toss.png"
 						alt="toss-main-logo" />
@@ -75,7 +78,9 @@
 							<ul>
 								<li>
 									<article class="article">
-										<div class="article__contents">
+										<div
+											class="article__contents"
+											onClick="goDetail()">
 											<span class="article__title"> Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기 1 </span>
 											<span class="article__description">
 												100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.
@@ -92,7 +97,9 @@
 								</li>
 								<li>
 									<article class="article">
-										<div class="article__contents">
+										<div
+											class="article__contents"
+											onClick="goDetail()">
 											<span class="article__title"> 레거시 제품을 버리고 CS 효율 높이기 </span>
 											<span class="article__description">
 												100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.
@@ -109,7 +116,9 @@
 								</li>
 								<li>
 									<article class="article">
-										<div class="article__contents">
+										<div
+											class="article__contents"
+											onClick="goDetail()">
 											<span class="article__title"> Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기 2 </span>
 											<span class="article__description">
 												100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.
@@ -126,7 +135,9 @@
 								</li>
 								<li>
 									<article class="article">
-										<div class="article__contents">
+										<div
+											class="article__contents"
+											onClick="goDetail()">
 											<span class="article__title"> Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기 3 </span>
 											<span class="article__description">
 												100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.
@@ -143,7 +154,9 @@
 								</li>
 								<li>
 									<article class="article">
-										<div class="article__contents">
+										<div
+											class="article__contents"
+											onClick="goDetail()">
 											<span class="article__title"> Node.js 라이브러리 배포 파이프라인에 플러그인 시스템 도입기 4 </span>
 											<span class="article__description">
 												100개가 넘는 라이브러리를 관리하면서 마주했던 문제들을 플러그인 시스템으로 풀어낸 방법을 공유합니다.
@@ -325,18 +338,26 @@
 				</div>
 			</div>
 		</main>
-		<footer>
-			<ul>
-				<li>홈페이지</li>
-				<li>회사소개</li>
-				<li>채용</li>
-				<li>고객센터</li>
-				<li>(주)비바리퍼블리카</li>
+		<footer class="footer">
+			<ul class="footer__lists">
+				<li class="footer__li">홈페이지</li>
+				<li class="footer__li">회사소개</li>
+				<li class="footer__li">채용</li>
+				<li class="footer__li">고객센터: 1599-4905 (24시간 연중무휴)</li>
+				<li class="footer__li">㈜비바리퍼블리카 Copyright © Viva Republica, Inc. All Rights Reserved.</li>
 			</ul>
 		</footer>
 		<script
 			type="module"
 			defer
 			src="./index.ts"></script>
+		<script>
+			function goMain() {
+				window.location.href = 'http://localhost:1234';
+			}
+			function goDetail() {
+				window.location.href = 'http://localhost:1234/pages/detail/detail.html';
+			}
+		</script>
 	</body>
 </html>
