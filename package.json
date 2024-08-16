@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "바닐라JS로 토스 SPA 웹앱 만들기",
 	"scripts": {
-		"start": "npx parcel ./src/index.html --no-cache",
+		"start": "npx parcel ./src/index.html ./src/pages/detail/detail.html --no-cache",
 		"build": "parcel build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
