@@ -3,6 +3,21 @@ import bannerImage from '../../public/assets/images/main-banner.webp';
 import lionImage from '../../public/assets/images/lion.webp';
 import { navigate, createElement } from '../index';
 import Navbar from '../components/Navbar';
+
+const fetchDataFromTypicode = async (url: string): Promise<object[]> => {
+	try {
+		const res = await fetch(url);
+		if (res && res.status === 200) {
+			return res.json();
+		} else {
+			throw new Error('fetching error');
+		}
+	} catch (e) {
+		console.error(e);
+		return [];
+	}
+};
+
 export default async function Home() {
 	// Array Data
 	const navAnchorLists = ['SLASH', 'SIMPLICITY'];
@@ -11,9 +26,10 @@ export default async function Home() {
 	const selectedTab = '전체';
 
 	// Data fetching
-	const articles: any = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json());
-	const popularComments: any = (await fetch('https://jsonplaceholder.typicode.com/comments').then((res) => res.json())).slice(0, 3);
-	const recentComments: any = (await fetch('https://jsonplaceholder.typicode.com/comments').then((res) => res.json())).slice(3);
+	// const articles: any = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json());
+	const articles: object[] = await fetchDataFromTypicode('https://jsonplaceholder.typicode.com/posts');
+	const popularComments: object[] = await fetchDataFromTypicode('https://jsonplaceholder.typicode.com/comments');
+	const recentComments: object[] = await fetchDataFromTypicode('https://jsonplaceholder.typicode.com/comments');
 	const tags = ['Node.', 'Frontend', 'tes', 'Product Desig', 'Server', 'SLASH23', 'ttest2', 'test3', 'test4', 'test5', 'test6'];
 
 	// replace할 Element 생성
