@@ -23,7 +23,7 @@ export const render = async () => {
 			component: Home,
 		},
 		{
-			path: '/detail',
+			path: '/detail/:id',
 			component: Detail,
 		},
 		{
@@ -35,11 +35,24 @@ export const render = async () => {
 			component: Simplicity,
 		},
 	];
-	const path = window.location.pathname;
-	console.log('🚀 ~ render ~ path:', path);
-	const component = routes.find((route) => route.path === path)?.component || NotFound;
 
-	$root.replaceChildren(await component());
+	const currentPath = window.location.pathname;
+	const pathToRegexRouters = () => {
+		return routes.map((route) => {
+			const regex = new RegExp('^' + route.path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
+			return {
+				route,
+				result: currentPath.match(regex),
+			};
+		});
+	};
+
+	const getMatchedRoute = pathToRegexRouters().find((i) => i.result);
+	const matchedComponent = getMatchedRoute?.route.component || NotFound;
+
+	// dynamic router인 경우, param을 넘겨줌
+	const param = getMatchedRoute?.result[1];
+	$root.replaceChildren(await matchedComponent(param));
 };
 
 window.addEventListener('DOMContentLoaded', async () => {

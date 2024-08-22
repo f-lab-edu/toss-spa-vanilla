@@ -4,7 +4,10 @@ import lionImage from '../../public/assets/images/lion.webp';
 import { navigate, createElement } from '../index';
 import Navbar from '../components/Navbar';
 
-export default function Detail() {
+export default function Detail(postId: string) {
+	// param이 없는 경우
+	if (!postId) navigate('/');
+
 	const navAnchorLists = ['SLASH', 'SIMPLICITY'];
 	const navButtonLists = ['구독하기', '채용 바로가기'];
 	const tabLists = ['전체', '개발', '디자인'];

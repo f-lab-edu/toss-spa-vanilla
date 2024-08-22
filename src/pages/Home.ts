@@ -106,12 +106,12 @@ export default async function Home() {
 						</ul>
 						<!-- </div> -->
 						<div class="main__left-articles">
-							<ul>
+							<ul class="main-posts">
 								${articles
 									.map(
 										(article) =>
 											`
-											<li>
+											<li key=${article.id}>
 												<article class="article">
 													<div
 														class="article__contents"
@@ -213,21 +213,33 @@ export default async function Home() {
     	</footer>
     `);
 
-	// 이벤트 핸들러 등록
+	// DOM 이벤트 핸들러 등록
+
 	$home.querySelector('.nav__logo').addEventListener('click', (e) => {
 		e.preventDefault();
 		navigate('/');
 	});
 
 	$home.querySelector('.nav__lists').addEventListener('click', (e) => {
-		if (!e.target.closest('a') || !e.target.closest('a').href) return;
-		e.preventDefault();
-		navigate(e.target.closest('a').href);
+		try {
+			const navInfo = e.target?.closest('a');
+			const navInfoHref = navInfo?.href;
+			if (!navInfo || !navInfoHref) throw new Error('navigation을 참조할 수 없습니다.');
+			navigate(`${navInfoHref}`);
+		} catch (e) {
+			console.error(e);
+		}
 	});
 
-	$home.querySelector('.article').addEventListener('click', (e) => {
+	$home.querySelector('.main-posts').addEventListener('click', (e) => {
 		e.preventDefault();
-		navigate('/detail');
+		try {
+			const postId = e.target?.closest('li')?.getAttribute('key');
+			if (!postId) throw new Error('메인 글의 postId를 찾을 수 없습니다.');
+			navigate(`/detail/${postId}`);
+		} catch (e) {
+			console.error(e);
+		}
 	});
 
 	return $home;
