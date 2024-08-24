@@ -5,6 +5,7 @@ import Slash from './pages/Slash';
 import Simplicity from './pages/Simplicity';
 
 export const navigate = (url: string) => {
+	if (!url) return null;
 	window.history.pushState(null, null, url);
 	render();
 };
