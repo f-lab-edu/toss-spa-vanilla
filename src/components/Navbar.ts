@@ -2,8 +2,9 @@ import logoImage from '../../public/assets/images/toss.png';
 import { createElement, navigate } from '../index';
 
 export default function Navbar() {
+	const navAnchorLists = ['SLASH', 'SIMPLICITY'];
+	const navButtonLists = ['구독하기', '채용 바로가기'];
 	const $navbar = createElement(`
-          <header>
 			<nav class="nav">
 				<div
 					class="nav__logo-wrapper"
@@ -18,31 +19,36 @@ export default function Navbar() {
 
 				<div class="nav__menu">
 					<ul class="nav__lists">
-						<li class="nav__li">
-							<a
-								class="nav__a"
-								href="SLASH">
-								SLASH
-							</a>
-						</li>
-						<li class="nav__li">
-							<a
-								class="nav__a"
-								href="simplicity">
-								SIMPLICITY
-							</a>
-						</li>
-						<li class="nav__li">
-							<button class="nav__btn nav__btn--subscribe">구독하기</button>
-						</li>
-						<li class="nav__li">
-							<button class="nav__btn nav__btn--hire">채용 바로가기</button>
-						</li>
+					    ${navAnchorLists
+							.map(
+								(text) =>
+									`
+								<li class="nav__li">
+									<a
+										class="nav__a"
+										href=${text.toLowerCase()}>
+										${text}
+									</a>
+								</li>
+							`
+							)
+							.join('')}
+							
+					    ${navButtonLists
+							.map(
+								(text) =>
+									`
+										<li class="nav__li">
+											<button class="nav__btn nav__btn${text === '구독하기' ? '--subscribe' : '--hire'}">${text}</button>
+										</li>
+									`
+							)
+							.join('')}
+					
 					</ul>
 				</div>
 			</nav>
-		</header>
-    `);
+			`);
 
 	// Element에 이벤트 핸들러 등록
 	$navbar.querySelector('.nav__logo').addEventListener('click', (e) => {
@@ -51,9 +57,14 @@ export default function Navbar() {
 	});
 
 	$navbar.querySelector('.nav__lists').addEventListener('click', (e) => {
-		if (!e.target.closest('a') || !e.target.closest('a').href) return;
-		e.preventDefault();
-		navigate(e.target.closest('a').href);
+		try {
+			const navInfo = e.target?.closest('a');
+			const navInfoHref = navInfo?.href;
+			if (!navInfo || !navInfoHref) throw new Error('navigation을 참조할 수 없습니다.');
+			navigate(`${navInfoHref}`);
+		} catch (e) {
+			console.error(e);
+		}
 	});
 
 	return $navbar;

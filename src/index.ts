@@ -15,26 +15,27 @@ export const createElement = (domString: string) => {
 	return $temp.content;
 };
 
+const routes = [
+	{
+		path: '/',
+		component: Home,
+	},
+	{
+		path: '/detail/:id',
+		component: Detail,
+	},
+	{
+		path: '/slash',
+		component: Slash,
+	},
+	{
+		path: '/simplicity',
+		component: Simplicity,
+	},
+];
+
 export const render = async () => {
 	const $root = document.getElementById('root');
-	const routes = [
-		{
-			path: '/',
-			component: Home,
-		},
-		{
-			path: '/detail/:id',
-			component: Detail,
-		},
-		{
-			path: '/slash',
-			component: Slash,
-		},
-		{
-			path: '/simplicity',
-			component: Simplicity,
-		},
-	];
 
 	const currentPath = window.location.pathname;
 	const pathToRegexRouters = () => {

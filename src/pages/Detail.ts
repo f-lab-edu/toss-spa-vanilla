@@ -8,51 +8,9 @@ export default function Detail(postId: string) {
 	// param이 없는 경우
 	if (!postId) navigate('/');
 
-	const navAnchorLists = ['SLASH', 'SIMPLICITY'];
-	const navButtonLists = ['구독하기', '채용 바로가기'];
-	const tabLists = ['전체', '개발', '디자인'];
-	const selectedTab = '전체';
-
-	const $navbar = Navbar();
 	const $detail = createElement(`
-            <header>
-                <nav class="nav">
-                    <div
-                        class="nav__logo-wrapper"
-                    >
-                        <img
-                            draggable="false"
-                            class="nav__logo"
-                            src=${logoImage}
-                            alt="toss-main-logo" 
-                            crossorigin/>
-                    </div>
-
-                    <div class="nav__menu">
-                        <ul class="nav__lists">
-                            <li class="nav__li">
-                                <a
-                                    class="nav__a"
-                                    href="SLASH">
-                                    SLASH
-                                </a>
-                            </li>
-                            <li class="nav__li">
-                                <a
-                                    class="nav__a"
-                                    href="simplicity">
-                                    SIMPLICITY
-                                </a>
-                            </li>
-                            <li class="nav__li">
-                                <button class="nav__btn nav__btn--subscribe">구독하기</button>
-                            </li>
-                            <li class="nav__li">
-                                <button class="nav__btn nav__btn--hire">채용 바로가기</button>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+            <header class="main-header">
+               
             </header>
 
             <main class="detail">
@@ -78,18 +36,9 @@ export default function Detail(postId: string) {
                 </section>
             </main>
     `);
-
-	// Element에 이벤트 핸들러 등록
-	$detail.querySelector('.nav__logo').addEventListener('click', (e) => {
-		e.preventDefault();
-		navigate('/');
-	});
-
-	$detail.querySelector('.nav__lists').addEventListener('click', (e) => {
-		if (!e.target.closest('a') || !e.target.closest('a').href) return;
-		e.preventDefault();
-		navigate(e.target.closest('a').href);
-	});
+	const $mainHeader = $detail.querySelector('.main-header');
+	const $navbar = Navbar();
+	$mainHeader.append($navbar);
 
 	return $detail;
 }

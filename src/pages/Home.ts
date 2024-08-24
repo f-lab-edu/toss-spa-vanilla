@@ -20,8 +20,6 @@ const fetchDataFromTypicode = async (url: string): Promise<object[]> => {
 
 export default async function Home() {
 	// Array Data
-	const navAnchorLists = ['SLASH', 'SIMPLICITY'];
-	const navButtonLists = ['구독하기', '채용 바로가기'];
 	const tabLists = ['전체', '개발', '디자인'];
 	const selectedTab = '전체';
 
@@ -33,52 +31,8 @@ export default async function Home() {
 	const tags = ['Node.', 'Frontend', 'tes', 'Product Desig', 'Server', 'SLASH23', 'ttest2', 'test3', 'test4', 'test5', 'test6'];
 
 	// replace할 Element 생성
-	const $navbar = Navbar();
 	const $home = createElement(`
-		<header>
-			<nav class="nav">
-				<div
-					class="nav__logo-wrapper"
-				>
-					<img
-						draggable="false"
-						class="nav__logo"
-						src=${logoImage}
-						alt="toss-main-logo" 
-                        crossorigin/>
-				</div>
-
-				<div class="nav__menu">
-					<ul class="nav__lists">
-					    ${navAnchorLists
-							.map(
-								(text) =>
-									`
-								<li class="nav__li">
-									<a
-										class="nav__a"
-										href=${text.toLowerCase()}>
-										${text}
-									</a>
-								</li>
-							`
-							)
-							.join('')}
-							
-					    ${navButtonLists
-							.map(
-								(text) =>
-									`
-										<li class="nav__li">
-											<button class="nav__btn nav__btn${text === '구독하기' ? '--subscribe' : '--hire'}">${text}</button>
-										</li>
-									`
-							)
-							.join('')}
-					
-					</ul>
-				</div>
-			</nav>
+		<header class="main-header">
 		</header>
 
 		<main class="main">
@@ -212,25 +166,11 @@ export default async function Home() {
 			</ul>
     	</footer>
     `);
+	const $mainHeader = $home.querySelector('.main-header');
+	const $navbar = Navbar();
+	$mainHeader.append($navbar);
 
 	// DOM 이벤트 핸들러 등록
-
-	$home.querySelector('.nav__logo').addEventListener('click', (e) => {
-		e.preventDefault();
-		navigate('/');
-	});
-
-	$home.querySelector('.nav__lists').addEventListener('click', (e) => {
-		try {
-			const navInfo = e.target?.closest('a');
-			const navInfoHref = navInfo?.href;
-			if (!navInfo || !navInfoHref) throw new Error('navigation을 참조할 수 없습니다.');
-			navigate(`${navInfoHref}`);
-		} catch (e) {
-			console.error(e);
-		}
-	});
-
 	$home.querySelector('.main-posts').addEventListener('click', (e) => {
 		e.preventDefault();
 		try {
